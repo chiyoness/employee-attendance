@@ -17,8 +17,7 @@
                 <ul class="dropdown-menu" aria-labelledby="exportDropdown">
                     <li><a class="dropdown-item" href="#" id="exportExcel">Excel (Client-side)</a></li>
                     <li><a class="dropdown-item" href="#" id="exportCSV">CSV (Client-side)</a></li>
-                    <li><a class="dropdown-item" href="#" id="exportPDF">PDF (Client-side)</a></li>
-
+                    <li><a class="dropdown-item" href="#" id="exportPDF">PDF (Client-side)</a></li
                 </ul>
             </div>
         </div>

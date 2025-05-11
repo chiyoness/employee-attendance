@@ -51,7 +51,9 @@ class AttendanceController extends Controller
             'success' => true,
             'message' => 'Check-in successful.'
         ]);
-    }    /**
+    }
+
+    /**
      * Record a check-out for the authenticated user.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -64,10 +66,7 @@ class AttendanceController extends Controller
             ->first();
 
         if (!$activeAttendance) {
-            return response()->json([
-                'success' => false,
-                'message' => 'No active check-in found.'
-            ], 400);
+            return response()->json(['message' => 'No active check-in found.'], 400);
         }
 
         // Update with check-out time
@@ -75,10 +74,7 @@ class AttendanceController extends Controller
             'check_out_time' => now(),
         ]);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Check-out successful.'
-        ]);
+        return response()->json(['message' => 'Check-out successful.']);
     }
       /**
      * Display attendance history for a specific user.

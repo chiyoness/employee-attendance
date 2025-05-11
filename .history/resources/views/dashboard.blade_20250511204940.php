@@ -112,85 +112,10 @@
                 </div>
             </div>
         </div>
-        @endif    </div>
+        @endif
+    </div>
 </div>
 @endsection
-
-@push('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Check In Button
-        document.getElementById('checkInBtn').addEventListener('click', function() {
-            fetch('{{ route('attendance.check-in') }}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                body: JSON.stringify({})
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    showAlert('success', data.message);
-                } else {
-                    showAlert('warning', data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                showAlert('danger', 'An error occurred while processing your request.');
-            });
-        });
-
-        // Check Out Button
-        document.getElementById('checkOutBtn').addEventListener('click', function() {
-            fetch('{{ route('attendance.check-out') }}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                body: JSON.stringify({})
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    showAlert('success', data.message);
-                } else {
-                    showAlert('warning', data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                showAlert('danger', 'An error occurred while processing your request.');
-            });
-        });
-
-        // Function to show alert
-        function showAlert(type, message) {
-            const alertDiv = document.createElement('div');
-            alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
-            alertDiv.role = 'alert';
-            
-            alertDiv.innerHTML = `
-                ${message}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            `;
-            
-            // Insert the alert at the top of the page
-            const container = document.querySelector('.container');
-            container.insertBefore(alertDiv, container.firstChild);
-            
-            // Auto dismiss after 5 seconds
-            setTimeout(() => {
-                const bsAlert = new bootstrap.Alert(alertDiv);
-                bsAlert.close();
-            }, 5000);
-        }
-    });
-</script>
-@endpush
 
 @push('scripts')
 <script src="https://kit.fontawesome.com/3b0c858f61.js" crossorigin="anonymous"></script>
