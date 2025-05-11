@@ -143,7 +143,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
 
-<script>    document.addEventListener('DOMContentLoaded', function() {
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
         // Client-side exports
         document.getElementById('exportExcel').addEventListener('click', function(e) {
             e.preventDefault();
@@ -174,22 +175,6 @@
                 }, 3000); // 3 seconds should be enough for most exports
             });
         });
-
-        // Handle delete modal
-        const deleteModal = document.getElementById('deleteUserModal');
-        if (deleteModal) {
-            deleteModal.addEventListener('show.bs.modal', function(event) {
-                const button = event.relatedTarget;
-                const userId = button.getAttribute('data-user-id');
-                const userName = button.getAttribute('data-user-name');
-                
-                const userNameSpan = deleteModal.querySelector('#deleteUserName');
-                const deleteForm = deleteModal.querySelector('#deleteUserForm');
-                
-                userNameSpan.textContent = userName;
-                deleteForm.action = '/users/' + userId;
-            });
-        }
     });
 
     // Excel Export Function
@@ -272,32 +257,3 @@
     }
 </script>
 @endpush
-
-<!-- Delete User Confirmation Modal -->
-<div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-danger text-white">
-                <h5 class="modal-title" id="deleteUserModalLabel">Confirm User Deletion</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="alert alert-warning">
-                    <i class="fas fa-exclamation-triangle me-2"></i>
-                    This action cannot be undone. All data associated with this user will be permanently deleted.
-                </div>
-                <p>Are you sure you want to delete the user <strong id="deleteUserName"></strong>?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <form id="deleteUserForm" method="POST" action="">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">
-                        <i class="fas fa-trash me-1"></i> Delete User
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>

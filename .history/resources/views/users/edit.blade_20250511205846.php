@@ -77,7 +77,8 @@
                         </div>
                     </div>
                     @endif
-                      <div class="col-md-12">
+                    
+                    <div class="col-md-12">
                         <div class="mb-3">
                             <label for="image" class="form-label">Profile Image</label>
                             <input type="file" class="form-control" id="image" name="image">
@@ -88,26 +89,6 @@
                                     <img src="{{ asset('storage/'.$user->image) }}" class="rounded-circle" width="100" height="100" alt="{{ $user->name }}">
                                 </div>
                             @endif
-                        </div>
-                    </div>
-                    
-                    <div class="col-12">
-                        <hr>
-                        <h5 class="text-primary mb-3">Change Password (Optional)</h5>
-                        <p class="text-muted small">Leave these fields empty if you don't want to change the password</p>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="password" class="form-label">New Password</label>
-                            <input type="password" class="form-control" id="password" name="password">
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="password_confirmation" class="form-label">Confirm New Password</label>
-                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
                         </div>
                     </div>
                 </div>

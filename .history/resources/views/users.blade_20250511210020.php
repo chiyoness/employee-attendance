@@ -143,7 +143,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
 
-<script>    document.addEventListener('DOMContentLoaded', function() {
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
         // Client-side exports
         document.getElementById('exportExcel').addEventListener('click', function(e) {
             e.preventDefault();
@@ -174,22 +175,6 @@
                 }, 3000); // 3 seconds should be enough for most exports
             });
         });
-
-        // Handle delete modal
-        const deleteModal = document.getElementById('deleteUserModal');
-        if (deleteModal) {
-            deleteModal.addEventListener('show.bs.modal', function(event) {
-                const button = event.relatedTarget;
-                const userId = button.getAttribute('data-user-id');
-                const userName = button.getAttribute('data-user-name');
-                
-                const userNameSpan = deleteModal.querySelector('#deleteUserName');
-                const deleteForm = deleteModal.querySelector('#deleteUserForm');
-                
-                userNameSpan.textContent = userName;
-                deleteForm.action = '/users/' + userId;
-            });
-        }
     });
 
     // Excel Export Function
