@@ -79,6 +79,23 @@
                                         <i class="fas fa-id-badge me-1"></i> All Employees
                                     </a>
                                 </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-file-export me-1"></i> Export
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('employees.export.csv') }}">
+                                                <i class="fas fa-file-csv me-2"></i> Export as CSV
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('employees.export.pdf') }}">
+                                                <i class="fas fa-file-pdf me-2"></i> Export as PDF
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                             @endif
                         @endauth
                     </ul>
