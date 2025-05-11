@@ -63,14 +63,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/active-employees/export/pdf', 'App\Http\Controllers\ExportController@exportActiveEmployeesPdf')->name('export.employees.pdf');
 });
 
-// Test route to check functionality
+// Test route to check middleware functionality
 Route::get('/test-admin', function () {
     return 'This route is accessible to everyone';
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['role:admin'])->group(function () {
     Route::get('/test-admin-only', function () {
-        return 'If you can see this, you are logged in!';
+        return 'If you can see this, the role middleware is working correctly!';
     });
 });
 

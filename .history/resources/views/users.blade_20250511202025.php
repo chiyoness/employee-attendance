@@ -92,8 +92,13 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td>{{ $user->email }}</td>                                    <td>{{ $user->job ?? 'Not specified' }}</td>
-                                    <td>{{ $user->phone ?? 'Not specified' }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->job ?? 'Not specified' }}</td>
+                                    <td>{{ $user->phone ?? 'Not specified' }}</td>                                    <td>
+                                        <span class="badge bg-{{ $user->roles->pluck('name')->first() === 'admin' ? 'danger' : 'success' }}">
+                                            {{ ucfirst($user->roles->pluck('name')->first()) }}
+                                        </span>
+                                    </td>
                                     <td>
                                         <div class="small text-muted">
                                             {{ $user->created_at->format('M d, Y') }}

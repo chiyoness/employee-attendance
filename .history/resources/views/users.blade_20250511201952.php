@@ -67,11 +67,13 @@
             @if($users->count() > 0)
                 <div class="table-responsive">
                     <table class="table table-hover" id="usersTable">
-                        <thead class="table-light">                            <tr>
+                        <thead class="table-light">
+                            <tr>
                                 <th><i class="fas fa-user text-primary me-2"></i>Name</th>
                                 <th><i class="fas fa-envelope text-primary me-2"></i>Email</th>
                                 <th><i class="fas fa-briefcase text-primary me-2"></i>Job</th>
                                 <th><i class="fas fa-phone text-primary me-2"></i>Phone</th>
+                                <th><i class="fas fa-user-tag text-primary me-2"></i>Role</th>
                                 <th><i class="fas fa-calendar text-primary me-2"></i>Created</th>
                                 <th><i class="fas fa-cogs text-primary me-2"></i>Actions</th>
                             </tr>
@@ -87,13 +89,21 @@
                                                 <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2" style="width: 40px; height: 40px;">
                                                     {{ strtoupper(substr($user->name, 0, 1)) }}
                                                 </div>
-                                            @endif                                            <div>
-                                                <div class="fw-bold">{{ $user->name }}</div>
+                                            @endif
+                                            <div>                                                <div class="fw-bold">{{ $user->name }}</div>
+                                                <span class="badge bg-{{ $user->hasRole('admin') ? 'danger' : 'success' }}">
+                                                    {{ ucfirst($user->getRoleNames()->first() ?? 'User') }}
+                                                </span>
                                             </div>
                                         </div>
                                     </td>
-                                    <td>{{ $user->email }}</td>                                    <td>{{ $user->job ?? 'Not specified' }}</td>
-                                    <td>{{ $user->phone ?? 'Not specified' }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->job ?? 'Not specified' }}</td>
+                                    <td>{{ $user->phone ?? 'Not specified' }}</td>                                    <td>
+                                        <span class="badge bg-{{ $user->roles->pluck('name')->first() === 'admin' ? 'danger' : 'success' }}">
+                                            {{ ucfirst($user->roles->pluck('name')->first()) }}
+                                        </span>
+                                    </td>
                                     <td>
                                         <div class="small text-muted">
                                             {{ $user->created_at->format('M d, Y') }}

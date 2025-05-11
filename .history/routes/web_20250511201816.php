@@ -57,20 +57,21 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/employees/export/excel/all', 'App\Http\Controllers\ExportController@exportAllEmployeesExcel')->name('employees.export.all.excel');
     Route::get('/employees/export/csv/all', 'App\Http\Controllers\ExportController@exportAllEmployeesCsv')->name('employees.export.all.csv');
     Route::get('/employees/export/pdf/all', 'App\Http\Controllers\ExportController@exportAllEmployeesPdf')->name('employees.export.all.pdf');
-      // Active employees export routes
+    
+    // Active employees export routes
     Route::get('/active-employees/export/excel', 'App\Http\Controllers\ExportController@exportActiveEmployeesExcel')->name('export.employees.excel');
     Route::get('/active-employees/export/csv', 'App\Http\Controllers\ExportController@exportActiveEmployeesCsv')->name('export.employees.csv');
     Route::get('/active-employees/export/pdf', 'App\Http\Controllers\ExportController@exportActiveEmployeesPdf')->name('export.employees.pdf');
 });
 
-// Test route to check functionality
+// Test route to check middleware functionality
 Route::get('/test-admin', function () {
     return 'This route is accessible to everyone';
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['role:admin'])->group(function () {
     Route::get('/test-admin-only', function () {
-        return 'If you can see this, you are logged in!';
+        return 'If you can see this, the role middleware is working correctly!';
     });
 });
 

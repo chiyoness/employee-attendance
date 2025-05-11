@@ -33,6 +33,9 @@
                         </div>
                     @endif                    <div>
                         <h4 class="fw-bold">{{ $user->name }}</h4>
+                        <span class="badge bg-{{ $user->hasRole('admin') ? 'danger' : 'success' }} fs-6 mb-2">
+                            {{ ucfirst($user->getRoleNames()->first() ?? 'User') }}
+                        </span>
                     </div>
                 </div>
                 <div class="col-md-9">

@@ -84,9 +84,11 @@ class UserController extends Controller
             'password' => bcrypt($validated['password']),
             'phone' => $validated['phone'] ?? null,
             'job' => $validated['job'] ?? null,
-            'image' => $validated['image'] ?? null,        ]);
+            'image' => $validated['image'] ?? null,
+        ]);
 
         return redirect()->route('users.show', $user->id)->with('success', 'User created successfully.');
+    }
     }
 
     /**

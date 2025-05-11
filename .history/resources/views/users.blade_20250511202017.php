@@ -87,13 +87,21 @@
                                                 <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2" style="width: 40px; height: 40px;">
                                                     {{ strtoupper(substr($user->name, 0, 1)) }}
                                                 </div>
-                                            @endif                                            <div>
-                                                <div class="fw-bold">{{ $user->name }}</div>
+                                            @endif
+                                            <div>                                                <div class="fw-bold">{{ $user->name }}</div>
+                                                <span class="badge bg-{{ $user->hasRole('admin') ? 'danger' : 'success' }}">
+                                                    {{ ucfirst($user->getRoleNames()->first() ?? 'User') }}
+                                                </span>
                                             </div>
                                         </div>
                                     </td>
-                                    <td>{{ $user->email }}</td>                                    <td>{{ $user->job ?? 'Not specified' }}</td>
-                                    <td>{{ $user->phone ?? 'Not specified' }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->job ?? 'Not specified' }}</td>
+                                    <td>{{ $user->phone ?? 'Not specified' }}</td>                                    <td>
+                                        <span class="badge bg-{{ $user->roles->pluck('name')->first() === 'admin' ? 'danger' : 'success' }}">
+                                            {{ ucfirst($user->roles->pluck('name')->first()) }}
+                                        </span>
+                                    </td>
                                     <td>
                                         <div class="small text-muted">
                                             {{ $user->created_at->format('M d, Y') }}

@@ -60,7 +60,8 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
-     */    public function store(Request $request)
+     */
+    public function store(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -68,6 +69,7 @@ class UserController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'phone' => 'nullable|string|max:20',
             'job' => 'nullable|string|max:255',
+            'role' => 'required|string|in:admin,employee',
             'image' => 'nullable|image|max:2048',
         ]);
 
@@ -84,9 +86,11 @@ class UserController extends Controller
             'password' => bcrypt($validated['password']),
             'phone' => $validated['phone'] ?? null,
             'job' => $validated['job'] ?? null,
-            'image' => $validated['image'] ?? null,        ]);
+            'image' => $validated['image'] ?? null,
+        ]);        // Assign the role
+        $user->assignRole($validated['role']);
 
-        return redirect()->route('users.show', $user->id)->with('success', 'User created successfully.');
+        return redirect()->route('users.show', $user->getKey())->with('success', 'User created successfully.');
     }
 
     /**
